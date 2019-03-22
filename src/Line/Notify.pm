@@ -20,32 +20,32 @@ sub new {
 
 sub message {
 	my ($self, $msg) = @_;
-	return $self->{msg} = $msg;
+	return $self->{msg} = $msg if (defined $msg);
 }
 
 sub stickerPackageId {
 	my ($self, $id) = @_;
-	return $self->{stickerPackageId} = $id;
+	return $self->{stickerPackageId} = $id if (defined $id);
 }
 
 sub stickerId {
 	my ($self, $id) = @_;
-	return $self->{stickerId} = $id;
+	return $self->{stickerId} = $id if (defined $id);
 }
 
 sub imageThumbnail {
 	my ($self, $img) = @_;
-	return $self->{imageThumbnail} = $img;
+	return $self->{imageThumbnail} = $img if (defined $img);
 }
 
 sub imageFullsize {
 	my ($self, $img) = @_;
-	return $self->{imageFullsize} = $img;	
+	return $self->{imageFullsize} = $img if (defined $img);	
 }
 
 sub imageFile {
 	my ($self, $img) = @_;
-	return $self->{imageFile} = $img;	
+	return $self->{imageFile} = $img if (defined $img);	
 }
 
 sub sendNotify {

@@ -8,6 +8,11 @@ main();
 sub main {
 	my $token = '';
 	my $line = Line::Notify->new($token);
-	$line->message('Test');
+	#$line->message();
+	#$line->stickerPackageId();
+	#$line->stickerId();
+	#$line->imageThumbnail();
+	#$line->imageFullsize();
+	#$line->imageFile();
 	$line->sendNotify(); # 
 }
