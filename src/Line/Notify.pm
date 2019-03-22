@@ -10,7 +10,6 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 sub new {
 	my $class = shift;
-	my ($token) = @_;
 	my $self = {
 		token => shift
 	};
