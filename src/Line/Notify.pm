@@ -5,7 +5,7 @@ use LWP::UserAgent;
 use DATA::Dumper;
 require Exporter;
 our @ISA = qw(Exporter);
-our %EXPORT_TAGS = ( 'all' => [ qw(new AddMsg sendNotify) ] );
+our %EXPORT_TAGS = ( 'all' => [ qw(new message stickerPackageId imageThumbnail imageFullsize imageFile sendNotify) ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 sub new {
@@ -58,10 +58,7 @@ sub sendNotify {
 		imageFullsize => $self->{imageFullsize},
 		imageFile => $self->{imageFile}
 	};
-	my $response = $ua->post('https://notify-api.line.me/api/notify', 
-			\@body,
-			Authorization => "Bearer $self->{token}"
-		);
+	my $response = $ua->post('https://notify-api.line.me/api/notify', \@body, Authorization => "Bearer $self->{token}");
 	if ($response->{success}) {
 		return 0;
 	} else {
