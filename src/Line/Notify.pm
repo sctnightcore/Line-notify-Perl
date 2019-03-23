@@ -50,22 +50,23 @@ sub imageFile {
 sub sendNotify {
 	my ( $self ) = @_;
 	my $ua = LWP::UserAgent->new;
-	my $response = $ua->post('https://notify-api.line.me/api/notify', {	
-			message => $self->{msg},
-			stickerPackageId => $self->{stickerPackageId},
-			stickerId => $self->{stickerId},
-			imageThumbnail => $self->{imageThumbnail},
-			imageFullsize => $self->{imageFullsize},
-			imageFile => $self->{imageFile}
-		},
-			Authorization => "Bearer $self->{token}",
-	);
+	my @body = {
+		message => $self->{msg},
+		stickerPackageId => $self->{stickerPackageId},
+		stickerId => $self->{stickerId},
+		imageThumbnail => $self->{imageThumbnail},
+		imageFullsize => $self->{imageFullsize},
+		imageFile => $self->{imageFile}
+	};
+	my $response = $ua->post('https://notify-api.line.me/api/notify', 
+			\@body,
+			Authorization => "Bearer $self->{token}"
+		);
 	if ($response->{success}) {
 		return 0;
 	} else {
 		return 1;
 	}
 }
-
 
 1;
