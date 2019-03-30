@@ -10,14 +10,12 @@ our %EXPORT_TAGS = ( 'all' => [ qw(new message stickerPackageId imageThumbnail i
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 sub new {
-	my $class = shift;
-	my $self = {
-		token => shift
-	};
-	bless $self, $class;
-	return $self;
+    my ($class, %args) = @_;
+    my $self = {};
+    $self->{ua} = LWP::UserAgent->new;
+    $self->{token} = $args{Token}; 
+	return bless $self, $class;
 }
-
 sub message {
 	my ($self, $msg) = @_;
 	return $self->{msg} = $msg if (defined $msg);
@@ -58,8 +56,7 @@ sub sendNotify {
 		imageFullsize => $self->{imageFullsize},
 		imageFile => $self->{imageFile}
 	};
-	my $ua = LWP::UserAgent->new;
-	my $response = $ua->post('https://notify-api.line.me/api/notify', \@body, Authorization => "Bearer $self->{token}");
+	my $response = $self->{ua}->post('https://notify-api.line.me/api/notify', \@body, Authorization => "Bearer $self->{token}");
 	if ($response->{success}) {
 		return true;
 	} else {
