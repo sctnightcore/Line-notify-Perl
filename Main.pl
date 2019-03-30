@@ -7,17 +7,10 @@ use Line::Notify qw/:all/;
 main();
 sub main {
 	my $line = Line::Notify->new( Token => '');
-	#$line->message();
-	#$line->stickerPackageId();
-	#$line->stickerId();
-	#$line->imageThumbnail();
-	#$line->imageFullsize();
-	#$line->imageFile();
-	#$line->sendNotify(); # 
+	$line->sendNotify( message => 'sctnightcoreiscuteboy' ); # 
 }
 =put
-TODO 
-$line->message(
+$line->sendNotify(
 	message => '',
 	stickerPackageId => '',
 	stickerId => '',
@@ -25,6 +18,4 @@ $line->message(
 	imageFullsize => '',
 	imageFile => '',
 );
-It better ? 
-
 =cut

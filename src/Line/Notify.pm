@@ -6,7 +6,7 @@ use DATA::Dumper;
 use constant { true => 0, false => 1 };
 require Exporter;
 our @ISA = qw(Exporter);
-our %EXPORT_TAGS = ( 'all' => [ qw(new message stickerPackageId imageThumbnail imageFullsize imageFile sendNotify) ] );
+our %EXPORT_TAGS = ( 'all' => [ qw(new sendNotify) ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 sub new {
@@ -16,45 +16,16 @@ sub new {
     $self->{token} = $args{Token}; 
 	return bless $self, $class;
 }
-sub message {
-	my ($self, $msg) = @_;
-	return $self->{msg} = $msg if (defined $msg);
-}
-
-sub stickerPackageId {
-	my ($self, $id) = @_;
-	return $self->{stickerPackageId} = $id if (defined $id);
-}
-
-sub stickerId {
-	my ($self, $id) = @_;
-	return $self->{stickerId} = $id if (defined $id);
-}
-
-sub imageThumbnail {
-	my ($self, $img) = @_;
-	return $self->{imageThumbnail} = $img if (defined $img);
-}
-
-sub imageFullsize {
-	my ($self, $img) = @_;
-	return $self->{imageFullsize} = $img if (defined $img);	
-}
-
-sub imageFile {
-	my ($self, $img) = @_;
-	return $self->{imageFile} = $img if (defined $img);	
-}
 
 sub sendNotify {
-	my ( $self ) = @_;
+	my ( $self, %args) = @_;
 	my @body = {
-		message => $self->{msg},
-		stickerPackageId => $self->{stickerPackageId},
-		stickerId => $self->{stickerId},
-		imageThumbnail => $self->{imageThumbnail},
-		imageFullsize => $self->{imageFullsize},
-		imageFile => $self->{imageFile}
+		message => $args{message},
+		stickerPackageId => $args{stickerPackageId},
+		stickerId => $args{stickerId},
+		imageThumbnail => $args{imageThumbnail},
+		imageFullsize => $args{imageFullsize},
+		imageFile => $args{imageFile}
 	};
 	my $response = $self->{ua}->post('https://notify-api.line.me/api/notify', \@body, Authorization => "Bearer $self->{token}");
 	if ($response->{success}) {
