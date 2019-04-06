@@ -10,10 +10,10 @@ our %EXPORT_TAGS = ( 'all' => [ qw(new sendNotify) ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 sub new {
-    my ($class, %args) = @_;
-    my $self = {};
-    $self->{ua} = LWP::UserAgent->new;
-    $self->{token} = $args{Token}; 
+	my ($class, %args) = @_;
+	my $self = {};
+	$self->{ua} = LWP::UserAgent->new;
+	$self->{token} = $args{Token}; 
 	return bless $self, $class;
 }
 
