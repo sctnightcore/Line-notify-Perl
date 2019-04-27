@@ -4,11 +4,6 @@ use warnings;
 use LWP::UserAgent;
 use DATA::Dumper;
 use constant { true => 0, false => 1 };
-require Exporter;
-our @ISA = qw(Exporter);
-our %EXPORT_TAGS = ( 'all' => [ qw(new sendNotify) ] );
-our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
-
 sub new {
 	my ($class, %args) = @_;
 	my $self = {};
