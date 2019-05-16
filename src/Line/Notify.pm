@@ -15,15 +15,16 @@ sub new {
 sub sendNotify {
 	my ( $self, %args) = @_;
 	my @body = {
-		message => $args{message},
-		stickerPackageId => $args{stickerPackageId},
-		stickerId => $args{stickerId},
-		imageThumbnail => $args{imageThumbnail},
-		imageFullsize => $args{imageFullsize},
-		imageFile => $args{imageFile}
+		message => defined($args{message}) ? $args{message} : '',
+		stickerPackageId => defined($args{stickerPackageId}) ? $args{stickerPackageId} : '',
+		stickerId => defined($args{stickerId}) ? $args{stickerId} : '',
+		imageThumbnail => defined($args{imageThumbnail}) ? $args{imageThumbnail} : '',
+		imageFullsize => defined($args{imageFullsize}) ? $args{imageFullsize} : '',
+		imageFile => defined($args{imageFile}) ? $args{imageFile} : ''
 	};
 	my $response = $self->{ua}->post('https://notify-api.line.me/api/notify', \@body, Authorization => "Bearer $self->{token}");
 	if ($response->{success}) {
+		#TODO RETURN DATA
 		return true;
 	} else {
 		return false;
