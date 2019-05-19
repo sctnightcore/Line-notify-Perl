@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use FindBin qw( $RealBin );
 use lib "$RealBin/src";
-use Line::Notify qw/:all/;
+use Line::Notify;
 
 main();
 sub main {
