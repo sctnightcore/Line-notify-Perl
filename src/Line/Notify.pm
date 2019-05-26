@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use LWP::UserAgent;
 use DATA::Dumper;
+use JSON::XS;
 use constant { true => 0, false => 1 };
 sub new {
 	my ($class, %args) = @_;
@@ -23,11 +24,10 @@ sub sendNotify {
 		imageFile => defined($args{imageFile}) ? $args{imageFile} : ''
 	};
 	my $response = $self->{ua}->post('https://notify-api.line.me/api/notify', \@body, Authorization => "Bearer $self->{token}");
-	if ($response->{success}) {
-		#TODO RETURN DATA
-		return true;
+	if ($response->is_success) {
+		return decode_json($response->decoded_content);
 	} else {
-		return false;
+		return;
 	}
 }
 
